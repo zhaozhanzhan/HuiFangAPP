@@ -54,7 +54,7 @@ export class PersonInfoPage {
     const loading = this.gloService.showLoading("正在查询，请稍候...");
     const formData: any = {};
     if (loginInfo.LoginId) {
-      formData.serverPensonID = loginInfo.LoginId;
+      formData.visitPensonID = loginInfo.LoginId;
     }
     // const testObj: any = {};
     // testObj.__login = true;
@@ -66,13 +66,13 @@ export class PersonInfoPage {
     // );
 
     this.httpReq.get(
-      "home/a/person/homeServerPerson/getByServerPensonID",
+      "home/a/visit/homeVisitPerson/getByVisitPensonID",
       formData,
       (data: any) => {
         if (data["data"] && data["data"]["result"] == 0) {
           // this.gloService.showMsg("登录成功", null, 1000);
           loading.dismiss();
-          this.formInfo = data["data"]["homeServerPerson"];
+          this.formInfo = data["data"]["homeVisitPerson"];
           // loginInfo.LoginState = "success"; // 登录状态
           // loginInfo.LoginTime = new Date().getTime(); // 登录时间
           // loginInfo.UserName = formData.username; // 用户名

@@ -23,13 +23,15 @@
         <ion-row padding-top>
             <ion-col class="disFlex justConC">
                 <div class="w90p">
-                    <div class="borBBox">
-                        <ion-row align-items-center>
-                            <ion-col col-2 text-center>
-                                <i class="iconfont icon-User2 ftz30 color333"></i>
+                    <div class="borBSB8C0CD">
+                        <ion-row align-items-center no-padding>
+                            <ion-col col-2 text-center no-padding>
+                                <i class="iconfont icon-User2 ftz30 color6F7C95"></i>
                             </ion-col>
-                            <ion-col col-10>
-                                <ion-input formControlName="username" class="ftz16" type="text" placeholder="账号"></ion-input>
+                            <ion-col col-10 no-padding>
+                                <ion-item no-padding>
+                                    <ion-input formControlName="username" class="ftz16" type="text" placeholder="账号"></ion-input>
+                                </ion-item>
                             </ion-col>
                         </ion-row>
                         <ion-row>
@@ -38,13 +40,15 @@
                             </ion-col>
                         </ion-row>
                     </div>
-                    <div class="borBBox">
-                        <ion-row align-items-center>
-                            <ion-col col-2 text-center>
-                                <i class="iconfont icon-MiMa ftz30 color333"></i>
+                    <div class="borBSB8C0CD">
+                        <ion-row align-items-center no-padding>
+                            <ion-col col-2 text-center no-padding>
+                                <i class="iconfont icon-MiMa ftz30 color6F7C95"></i>
                             </ion-col>
-                            <ion-col col-10>
-                                <ion-input type="password" formControlName="password" class="ftz16" type="password" placeholder="密码"></ion-input>
+                            <ion-col col-10 no-padding>
+                                <ion-item no-padding>
+                                    <ion-input type="password" formControlName="password" class="ftz16" type="password" placeholder="密码"></ion-input>
+                                </ion-item>
                             </ion-col>
                         </ion-row>
                         <ion-row>
@@ -53,7 +57,7 @@
                             </ion-col>
                         </ion-row>
                     </div>
-                    <div class="mt15 pl15">
+                    <div class="mt15 pl15 w140">
                         <div class="checkbox-wrap disFlex" (click)="toggleRemPwd()">
                             <div class="flexBasis20 pt1">
                                 <div class="checkbox-box" [ngClass]="{'active': isRemPwd}">

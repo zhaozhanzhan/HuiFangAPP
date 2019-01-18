@@ -26,14 +26,13 @@
             </ion-row>
         </div> -->
         <div class="disFlex justConC pt20">
-            <div class="h100p disFlex aligIteC" *ngIf="isOpenSer" (click)="jumpPage('ServiceConductPage')">
+            <!-- <div class="h100p disFlex aligIteC" *ngIf="isOpenSer" (click)="jumpPage('ServiceConductPage')">
                 <span>
                     <i class="iconfont icon-TiXing ftz22 colorF8D714"></i>
                 </span>
                 <span>服务进行中，</span>
-                <!-- {{hours}}:{{minutes}}:{{seconds}} -->
                 <span class="color09F">点击查看</span>
-            </div>
+            </div> -->
         </div>
         <div class="w100p pl10 pr10 mt5 h75p">
             <div class="h100p">
@@ -49,23 +48,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w120 h110 borRadius20 iconBg2 p15" (click)="jumpPage('UserListPage')">
+                        <div class="w120 h110 borRadius20 iconBg2 p15" (click)="jumpPage('ReturnVisitObjPage')">
                             <div class="w100p h100p disFlex flexDirC justConSB aligIteC">
                                 <div>
                                     <i class="iconfont icon-UserInfo ftz50 colorFFF"></i>
                                 </div>
                                 <div>
-                                    <span class="ftz16 ftwB colorFFF">用户信息</span>
+                                    <span class="ftz16 ftwB colorFFF">回访对象</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="w120 h110 borRadius20 iconBg5 p15" (click)="jumpPage('ServiceConfigPage',{'intoWay':'jumpInto'})">
+                        <div class="w120 h110 borRadius20 iconBg5 p15" (click)="jumpPage('ReturnVisitListPage')">
                             <div class="w100p h100p disFlex flexDirC justConSB aligIteC">
                                 <div>
                                     <i class="iconfont icon-ServiceConfig ftz50 colorFFF"></i>
                                 </div>
                                 <div>
-                                    <span class="ftz16 ftwB colorFFF">服务配置</span>
+                                    <span class="ftz16 ftwB colorFFF">回访记录</span>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +74,7 @@
                                     <i class="iconfont icon-ZongHe1 ftz50 colorFFF"></i>
                                 </div>
                                 <div>
-                                    <span class="ftz16 ftwB colorFFF">综合查询</span>
+                                    <span class="ftz16 ftwB colorFFF">回访异常</span>
                                 </div>
                             </div>
                         </div>

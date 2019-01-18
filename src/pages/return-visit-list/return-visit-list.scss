@@ -1,0 +1,25 @@
+page-return-visit-list {
+    .maskBg {
+        background-color: rgba(0, 0, 0, .7);
+    }
+    .cardBg {
+        background: linear-gradient(-240deg, #FF7400, #FFA92D) !important;
+    }
+    .cusPopver {
+        .triangle {
+            &::after {
+                content: "";
+                position: absolute;
+                width: 0px;
+                height: 0px;
+                border-top: 10px solid transparent;
+                border-right: 10px solid transparent;
+                border-bottom: 10px solid #FFF;
+                border-left: 10px solid transparent;
+                z-index: 115;
+                right: 8px;
+                top: -20px;
+            }
+        }
+    }
+}
