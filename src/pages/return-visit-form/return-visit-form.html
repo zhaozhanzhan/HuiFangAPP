@@ -1,0 +1,240 @@
+<!-- 导航条区域 Begin -->
+<ion-header>
+    <ion-navbar color="orange" hideBackButton="true">
+        <ion-title>回访表单</ion-title>
+        <ion-buttons start>
+            <button ion-button class="pl10" (click)="backHome()">
+                <!-- <span color="primary" showWhen="ios">返回</span> -->
+                <ion-icon class="ftz30" name="ios-home" showWhen="android,windows,ios"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button class="pr10" (click)="navCtrl.canGoBack()?navCtrl.pop():''">
+                <span showWhen="android,windows,ios">返回</span>
+                <!-- <ion-icon class="ftz30" name="ios-home" showWhen="android,windows,ios"></ion-icon> -->
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<!-- 导航条区域 End -->
+
+<!-- 页面内容区域 Begin -->
+<ion-content>
+    <div>
+        <div>
+            <div>
+                <ion-row padding-top>
+                    <ion-col class="disFlex justConC">
+                        <div class="w80p">
+                            <div class="">
+                                <ion-row align-items-center no-padding>
+                                    <ion-col col-12 no-padding>
+                                        <ion-item no-padding>
+                                            <ion-input text-center class="ftz16" type="text" placeholder="请输入服务编号"></ion-input>
+                                        </ion-item>
+                                    </ion-col>
+                                </ion-row>
+                            </div>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <div class="disFlex justConC aligIteC h40 mt10">
+                    <span class="ftz20">是否看见老人？</span>
+                </div>
+                <div class="mt20 w100p">
+                    <div class="disFlex justConC w100p">
+                        <div class="disFlex justConSA w60p">
+                            <div>
+                                <div class="checkbox-wrap disFlex">
+                                    <div class="flexBasis20 pt4">
+                                        <div class="checkbox-box" [ngClass]="{'active': true}">
+                                            <div class="checkbox-box-inner" [ngClass]="{'checkbox-box-check': true}"></div>
+                                        </div>
+                                        <input type="checkbox" class="checkbox-base" />
+                                    </div>
+                                    <label class="checkbox-label flexGrow1 pl5">
+                                        <div class="disFlex ftz18">
+                                            <span>是</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="checkbox-wrap disFlex">
+                                    <div class="flexBasis20 pt4">
+                                        <div class="checkbox-box" [ngClass]="{'active': true}">
+                                            <div class="checkbox-box-inner" [ngClass]="{' checkbox-box-check': true}"></div>
+                                        </div>
+                                        <input type="checkbox" class="checkbox-base" />
+                                    </div>
+                                    <label class="checkbox-label flexGrow1 pl5">
+                                        <div class="disFlex ftz18">
+                                            <span>否</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="disFlex justConC mt44 w100p">
+                        <div class="disFlex flexWrapW w100p">
+                            <div class="w50p pl20 mb20" *ngFor="let x of formInfo?.unsightedReason;let i = index;">
+                                <div class="checkbox-wrap disFlex">
+                                    <div class="flexBasis20 pt4">
+                                        <div class="checkbox-box" [ngClass]="{'active': true}">
+                                            <div class="checkbox-box-inner" [ngClass]="{'checkbox-box-check': true}"></div>
+                                        </div>
+                                        <input type="checkbox" class="checkbox-base" [value]="x?.value" />
+                                    </div>
+                                    <label class="checkbox-label flexGrow1 pl5">
+                                        <div class="disFlex ftz18">
+                                            <span>{{x?.opertionStr}}</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- <div class="w50p pl20">
+                                <div class="checkbox-wrap disFlex">
+                                    <div class="flexBasis20">
+                                        <div class="checkbox-box" [ngClass]="{'active': true}">
+                                            <div class="checkbox-box-inner" [ngClass]="{' checkbox-box-check': true}"></div>
+                                        </div>
+                                        <input type="checkbox" class="checkbox-base" />
+                                    </div>
+                                    <label class="checkbox-label flexGrow1 pl5">
+                                        <div class="disFlex ftz18">
+                                            <span>住院</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="w50p pl20">
+                                <div class="checkbox-wrap disFlex">
+                                    <div class="flexBasis20">
+                                        <div class="checkbox-box" [ngClass]="{'active': true}">
+                                            <div class="checkbox-box-inner" [ngClass]="{' checkbox-box-check': true}"></div>
+                                        </div>
+                                        <input type="checkbox" class="checkbox-base" />
+                                    </div>
+                                    <label class="checkbox-label flexGrow1 pl5">
+                                        <div class="disFlex ftz18">
+                                            <span>住院</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <!-- <div class="disFlex justConC mt20 w100p">
+                        <div class="disFlex justConSA w70p">
+                            <div class="w50p">
+                                <div class="checkbox-wrap disFlex">
+                                    <div class="flexBasis20">
+                                        <div class="checkbox-box" [ngClass]="{'active': true}">
+                                            <div class="checkbox-box-inner" [ngClass]="{'checkbox-box-check': true}"></div>
+                                        </div>
+                                        <input type="checkbox" class="checkbox-base" />
+                                    </div>
+                                    <label class="checkbox-label flexGrow1 pl5">
+                                        <div class="disFlex ftz18">
+                                            <span>入住机构</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="w50p pl20">
+                                <div class="checkbox-wrap disFlex">
+                                    <div class="flexBasis20">
+                                        <div class="checkbox-box" [ngClass]="{'active': true}">
+                                            <div class="checkbox-box-inner" [ngClass]="{' checkbox-box-check': true}"></div>
+                                        </div>
+                                        <input type="checkbox" class="checkbox-base" />
+                                    </div>
+                                    <label class="checkbox-label flexGrow1 pl5">
+                                        <div class="disFlex ftz18">
+                                            <span>人户分离</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="disFlex justConC mt20 w100p">
+                        <div class="disFlex justConSA w70p">
+                            <div class="w50p">
+                                <div class="checkbox-wrap disFlex">
+                                    <div class="flexBasis20">
+                                        <div class="checkbox-box" [ngClass]="{'active': true}">
+                                            <div class="checkbox-box-inner" [ngClass]="{'checkbox-box-check': true}"></div>
+                                        </div>
+                                        <input type="checkbox" class="checkbox-base" />
+                                    </div>
+                                    <label class="checkbox-label flexGrow1 pl5">
+                                        <div class="disFlex ftz18">
+                                            <span>死亡</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="w50p pl20">
+                                <div class="checkbox-wrap disFlex">
+                                    <div class="flexBasis20">
+                                        <div class="checkbox-box" [ngClass]="{'active': true}">
+                                            <div class="checkbox-box-inner" [ngClass]="{' checkbox-box-check': true}"></div>
+                                        </div>
+                                        <input type="checkbox" class="checkbox-base" />
+                                    </div>
+                                    <label class="checkbox-label flexGrow1 pl5">
+                                        <div class="disFlex ftz18">
+                                            <span>暂时失联</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="pb30">
+                    <div>
+                        <div class="mt20" *ngFor="let x of formInfo?.DictData; let i = index;">
+                            <div class="disFlex justConC aligIteC">
+                                <div class="disFlex h40 justConC aligIteC bgcFF9261 colorFFF w80p">
+                                    <span>{{x?.title}}</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="disFlex mt20 w100p" *ngFor="let y of x?.listArr; let j = index;" (click)="changeSel(formInfo?.DictData,'hasSelect',i,'listArr',j)">
+                                    <div class="disFlex flexWrapW flexShrink0 w90p ml20">
+                                        <div class="w100p">
+                                            <div class="checkbox-wrap disFlex">
+                                                <div class="flexBasis20 pt4">
+                                                    <div class="checkbox-box" [ngClass]="{'active': x?.hasSelect == y?.value}">
+                                                        <div class="checkbox-box-inner" [ngClass]="{'checkbox-box-check': x?.hasSelect == y?.value}"></div>
+                                                    </div>
+                                                    <input type="checkbox" class="checkbox-base" />
+                                                </div>
+                                                <label class="checkbox-label flexGrow1 pl5">
+                                                    <div class="disFlex ftz18">
+                                                        <span>{{y?.opertionStr}}</span>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <div class="w100p" text-center>
+            <button ion-button round class="w90p" color="orange">保存</button>
+        </div>
+    </ion-toolbar>
+</ion-footer>
+<!-- 页面内容区域 End -->
