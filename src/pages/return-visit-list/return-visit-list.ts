@@ -59,7 +59,7 @@ export class ReturnVisitListPage {
     this.sendData.pageNo = pageObj.currentPage; // 定义当前页码
     this.sendData.pageSize = pageObj.everyItem; // 定义当前页面请求条数
     this.sendData.totalPage = pageObj.totalPage; // 定义总页数
-    this.sendData.visitFalg = 0; // 1是已访问，0是未访问
+    this.sendData.visitFalg = 1; // 1是已访问，0是未访问
     // 请求列表数据
     this.reqData(
       this.reqUrl,

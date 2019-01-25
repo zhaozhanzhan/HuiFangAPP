@@ -38,7 +38,7 @@
                         </div>
                     </ion-col>
                     <ion-col col-4>
-                        <button ion-button block color="orange" (click)="serNursWorker(userCode)">查询对应护工</button>
+                        <button ion-button block color="orange" (click)="serNursWorker(userCode)">查询护工</button>
                     </ion-col>
                 </ion-row>
                 <div>
@@ -46,8 +46,8 @@
                         <span class="ftz16">请选择要评价的护工！</span>
                     </div>
                     <div class="disFlex justConFS h40 mt10 pl20" *ngIf="!(nursWorkerArr.length > 0)">
-                        <span class="ftz16 colorDan" *ngIf="paramObj.intoWay == 'uploadImg'">请查询对应护工！</span>
-                        <span class="ftz16 colorDan" *ngIf="paramObj.intoWay == 'scanCode'">未获取到对应护工！</span>
+                        <span class="ftz16 colorDan" *ngIf="paramObj?.intoWay == 'uploadImg'">请查询对应护工！</span>
+                        <span class="ftz16 colorDan" *ngIf="paramObj?.intoWay == 'scanCode'">未获取到对应护工！</span>
                     </div>
                     <div class="disFlex justConFS flexWrapW w100p" *ngIf="nursWorkerArr.length > 0">
                         <div class="ml20" *ngFor="let x of nursWorkerArr;let i = index;" (click)="setNursWorkerId(x?.personCode,x?.userCode)">
@@ -154,7 +154,7 @@
                         </div>
                     </div> -->
                 </div>
-                <div class="disFlex justConC mt20 w100p" [hidden]="isSeeOldMan == '1'">
+                <div class="disFlex justConC mt20 w100p" [hidden]="isSeeOldMan">
                     <div class="disFlex flexWrapW w100p">
                         <div class="w50p pl20 mb20" *ngFor="let x of formInfo?.unsightedReason;let i = index;" (click)="setNoSeeOldManReason(x.value)">
                             <div class="checkbox-wrap disFlex">

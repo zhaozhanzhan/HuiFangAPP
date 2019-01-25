@@ -32,7 +32,6 @@ export class ReturnVisitFormPage {
   public userCode: string = ""; // 310106001100001 老人档案编号
   public nursWorkerArr: Array<any> = [];
   public isSeeOldMan: boolean = true; // 是否看见老人
-  public isSeeOldMan1: boolean = false; // 是否看见老人
   public nursWorkerId: string = null; // 护工ID
   public oldManId: string = null; // 老人ID
   public noSeeOldManReason: string = null; // 未看见老人原因
@@ -61,7 +60,9 @@ export class ReturnVisitFormPage {
         this.navCtrl.pop();
       }
     } else {
-      this.serNursWorker(this.paramObj.userCode);
+      if (this.paramObj.intoWay == "scanCode") {
+        this.serNursWorker(this.paramObj.userCode);
+      }
     }
   }
 
