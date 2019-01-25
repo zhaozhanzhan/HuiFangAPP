@@ -13,7 +13,6 @@ import {
   ViewController
 } from "ionic-angular";
 import { NativeAudio } from "@ionic-native/native-audio";
-import { Storage } from "@ionic/storage";
 import { NFC } from "@ionic-native/nfc"; // NFC
 import _ from "underscore"; // 工具类
 import { GlobalService } from "../../common/service/GlobalService";
@@ -21,6 +20,7 @@ import { HttpReqService } from "../../common/service/HttpUtils.Service";
 import { ParamService } from "../../common/service/Param.Service";
 import { ServiceNotification } from "../../common/service/ServiceNotification";
 import { loginInfo } from "../../common/config/BaseConfig";
+// import { Storage } from "@ionic/storage";
 // import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 // import { FormValidService } from "../../common/service/FormValid.Service";
 // import { JsUtilsService } from "../../common/service/JsUtils.Service";
@@ -40,6 +40,7 @@ export class HomePage {
   public nfcId: any = null; // nfcId
   public workID: any = null; // 服务ID
   public timerInter: any = null; // 定时器
+  public nfcOpenScan: boolean = true; // nfc扫描状态
 
   // public beginTime: any = null; // 服务开始时间
   // public endTime: any = null; // 服务终止时间
@@ -58,9 +59,9 @@ export class HomePage {
   constructor(
     // private fb: FormBuilder, // 响应式表单
     // private jsUtil: JsUtilsService, // 自定义JS工具类
+    // private ionicStorage: Storage, // IonicStorage
     public app: App,
     private httpReq: HttpReqService, // Http请求服务
-    private ionicStorage: Storage, // IonicStorage
     public nfc: NFC, // NFC
     public navCtrl: NavController, // 导航控制器
     public navParams: NavParams, // 导航参数传递控制
@@ -78,96 +79,81 @@ export class HomePage {
   ionViewDidLoad() {}
 
   ionViewDidEnter() {
-    this.ionicStorage.get("loginInfo").then(loginObj => {
-      if (!_.isNull(loginObj) && !_.isEmpty(loginObj)) {
-        // 判断是否是空对象
-        console.error("loginObj========", loginObj);
-        const loginId = loginObj.LoginId;
-        if (_.isString(loginId) && loginId.length > 0) {
-          const sendData: any = {};
-          sendData.serverPersonID = loginId;
-          this.httpReq.get(
-            "home/a/home/homeServerWork/getWorking",
-            sendData,
-            (data: any) => {
-              if (data["data"] && data["data"]["result"] == 0) {
-                this.isOpenSer = true;
-                if (
-                  data["data"]["workDetailObj"] &&
-                  data["data"]["workDetailObj"]["startTime"]
-                ) {
-                  this.nfcId = data["data"]["workDetailObj"]["nfcNo"];
-                  this.workID = data["data"]["workDetailObj"]["workID"];
-                  const bTime = data["data"]["workDetailObj"]["startTime"];
-                  this.serNotifi.setManyMin(
-                    data["data"]["workDetailObj"]["maxWorktime"]
-                  );
-                  this.serNotifi.setXMin(
-                    data["data"]["workDetailObj"]["warnFrequency"]
-                  );
+    this.nfcOpenScan = true;
+    // this.ionicStorage.get("loginInfo").then(loginObj => {
+    // if (!_.isNull(loginObj) && !_.isEmpty(loginObj)) {
+    //   // 判断是否是空对象
+    //   console.error("loginObj========", loginObj);
+    //   const loginId = loginObj.LoginId;
+    //   if (_.isString(loginId) && loginId.length > 0) {
+    //     const sendData: any = {};
+    //     sendData.serverPersonID = loginId;
+    //     this.httpReq.get(
+    //       "home/a/home/homeServerWork/getWorking",
+    //       sendData,
+    //       (data: any) => {
+    //         if (data["data"] && data["data"]["result"] == 0) {
 
-                  this.serNotifi.setNfcNo(this.nfcId);
-                  this.serNotifi.setWorkId(this.workID);
-                  this.serNotifi.bTimeStamp(bTime); // 将开始时间转换为时间戳
-                  this.serNotifi.calTimeStamp(); // 计算各种所需要的时间戳
-                  this.serNotifi.getRemindArr(); // 获取提醒对象数组
-
-                  this.serNotifi.getHms((data: any) => {
-                    // 获取时分秒并回调
-                    console.error("data", data);
-                    this.hours = data.hours;
-                    this.minutes = data.minutes;
-                    this.seconds = data.seconds;
-                    this.startWatch();
-                    this.serNotifi.openServer(); // 开启定时服务
-                    this.serNotifi.clickNotifi(); // 单击通知
-                    // this.serNotifi.startWatch(data => {}); // 开启时长计时
-                  }); // 获取服务时长服务
-                }
-              } else {
-                this.isOpenSer = false;
-                this.serNotifi.closeServer(); // 关闭定时服务
-                // this.gloService.showMsg(data["data"]["message"]);
-              }
-            }
-          );
-        } else {
-          this.isOpenSer = false;
-          this.serNotifi.closeServer(); // 关闭定时服务
-          this.gloService.showMsg("未获取到用户ID!");
-        }
-      } else {
-        this.isOpenSer = false;
-        this.serNotifi.closeServer(); // 关闭定时服务
-        this.gloService.showMsg("未获取到用户ID!");
-      }
-    });
+    //         } else {
+    //           this.isOpenSer = false;
+    //           this.serNotifi.closeServer(); // 关闭定时服务
+    //           // this.gloService.showMsg(data["data"]["message"]);
+    //         }
+    //       }
+    //     );
+    //   } else {
+    //     this.isOpenSer = false;
+    //     this.serNotifi.closeServer(); // 关闭定时服务
+    //     this.gloService.showMsg("未获取到用户ID!");
+    //   }
+    // } else {
+    //   this.isOpenSer = false;
+    //   this.serNotifi.closeServer(); // 关闭定时服务
+    //   this.gloService.showMsg("未获取到用户ID!");
+    // }
+    // });
     console.error("this.navCtrl", this.navCtrl);
     this.initNfcListener(); // 初始化NFC监听
 
     //=================订阅NFC扫描成功事件 Begin=================//
     this.events.subscribe("nfcScanSuc", (nfcId: any) => {
-      if (this.isOpenSer) {
-        // 已经开启
-        if (nfcId == this.nfcId) {
-          // 已经服务标签与扫描标签相同
+      this.getUserCode(nfcId).then(
+        (suc: any) => {
+          console.error("userCode", suc);
           this.events.unsubscribe("nfcScanSuc");
-          this.jumpPage("ServiceConductPage");
-        } else {
-          setTimeout(() => {
-            let rootNav = this.app.getRootNavs()[0]; // 获取根导航
-            let ionicApp = rootNav._app._appRoot;
-            let activePortal = ionicApp._toastPortal.getActive();
-            if (activePortal) {
-            } else {
-              this.gloService.showMsg("扫描标签与已开服务标签不一致！");
-            }
-          }, 300);
+          // this.navCtrl.goToRoot({});
+          // this.navCtrl.goToRoot().then(toRootSuc=>{},toRootErr=>{});
+          this.jumpPage("ReturnVisitFormPage", {
+            pictureId: "", // 图片ID
+            intoWay: "scanCode", // 'uploadImg'上传照片 "scanCode" 扫码 进入方式
+            userCode: suc // 老人编号
+          });
+        },
+        (err: any) => {
+          this.nfcOpenScan = true;
         }
-      } else {
-        this.events.unsubscribe("nfcScanSuc");
-        this.jumpPage("CardReadPage", { nfcId: nfcId });
-      }
+      );
+      // if (this.isOpenSer) {
+      //   // 已经开启
+      //   if (nfcId == this.nfcId) {
+      //     // 已经服务标签与扫描标签相同
+      //     this.events.unsubscribe("nfcScanSuc");
+      //     this.jumpPage("ServiceConductPage");
+      //   } else {
+      //     setTimeout(() => {
+      //       let rootNav = this.app.getRootNavs()[0]; // 获取根导航
+      //       let ionicApp = rootNav._app._appRoot;
+      //       let activePortal = ionicApp._toastPortal.getActive();
+      //       if (activePortal) {
+      //       } else {
+      //         this.gloService.showMsg("扫描标签与已开服务标签不一致！");
+      //       }
+      //     }, 300);
+      //   }
+      // } else {
+      //   this.events.unsubscribe("nfcScanSuc");
+      //   this.jumpPage("CardReadPage", { nfcId: nfcId });
+      // }
     });
     //=================订阅NFC扫描成功事件 End=================//
 
@@ -339,6 +325,47 @@ export class HomePage {
    */
   public noDevTit() {
     this.gloService.showMsg("该功能正在加急开发中...", null, 2000);
+  }
+
+  /**
+   * 获取NFC标签码
+   * @memberof HomePage
+   */
+  public getUserCode(nfcId: string) {
+    return new Promise((resolve, reject) => {
+      if (this.nfcOpenScan) {
+        if (_.isString(nfcId) && nfcId.length > 0) {
+          const sendObj: any = {};
+          sendObj.nfcNo = nfcId;
+          const loading = this.gloService.showLoading("正在查询,请稍候...");
+          this.nfcOpenScan = false;
+          this.httpReq.get(
+            "home/a/visit/homeVisit/getUserCode",
+            sendObj,
+            (data: any) => {
+              if (data["data"] && data["data"]["result"] == 0) {
+                loading.dismiss();
+                resolve(data["data"]["userCode"]);
+                // this.gloService.showMsg("登录成功", null, 1000);
+                // this.formInfo = data["data"];
+              } else {
+                // this.formInfo = {};
+                // this.gloService.showMsg("获取信息失败！");
+                loading.dismiss();
+                this.gloService.showMsg(data["message"], null, 1000);
+                reject();
+              }
+            }
+          );
+        } else {
+          this.gloService.showMsg("NFC标签错误！");
+          reject();
+        }
+      } else {
+        // this.gloService.showMsg("NFC标签错误！");
+        reject();
+      }
+    });
   }
 
   /**

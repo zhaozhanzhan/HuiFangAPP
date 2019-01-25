@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component } from "@angular/core";
 import {
   AlertController,
   NavController,
@@ -9,15 +9,15 @@ import {
   IonicPage
 } from "ionic-angular";
 import { NativeAudio } from "@ionic-native/native-audio";
-import { Storage } from "@ionic/storage";
+import _ from "underscore";
 import { GlobalService } from "../../common/service/GlobalService";
 import { HttpReqService } from "../../common/service/HttpUtils.Service";
-import { LoginPage } from "../login/login";
-import { loginInfo, reqObj } from "../../common/config/BaseConfig";
-import { PhotoPrevComponent } from "../../common/component/components/photo-prev/photo-prev";
-import { Local } from "../../common/service/Storage";
-import _ from "underscore";
 import { JsUtilsService } from "../../common/service/JsUtils.Service";
+import { reqObj } from "../../common/config/BaseConfig";
+// import { Storage } from "@ionic/storage";
+// import { LoginPage } from "../login/login";
+// import { PhotoPrevComponent } from "../../common/component/components/photo-prev/photo-prev";
+// import { Local } from "../../common/service/Storage";
 // import _ from "underscore"; // underscore工具类
 // import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 // import { FormValidService } from "../../common/service/FormValid.Service";
@@ -34,9 +34,9 @@ export class UserInfoPage {
   public formInfo: any = {}; // 数据信息
   constructor(
     // private fb: FormBuilder, // 响应式表单
+    // private ionicStorage: Storage, // IonicStorage
     private jsUtil: JsUtilsService, // 自定义JS工具类
     private httpReq: HttpReqService, // Http请求服务
-    private ionicStorage: Storage, // IonicStorage
     public navCtrl: NavController, // 导航控制器
     public navParams: NavParams, // 导航参数传递控制
     public menuCtrl: MenuController, // 侧滑菜单控制器

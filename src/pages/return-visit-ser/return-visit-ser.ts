@@ -13,10 +13,10 @@ import {
 import _ from "underscore"; // underscore工具类
 import { GlobalService } from "../../common/service/GlobalService";
 import { HttpReqService } from "../../common/service/HttpUtils.Service";
-import { pageObj, loginInfo } from "../../common/config/BaseConfig";
 import { ParamService } from "../../common/service/Param.Service";
 import { GlobalMethod } from "../../common/service/GlobalMethod";
 import { JsUtilsService } from "../../common/service/JsUtils.Service";
+import { pageObj } from "../../common/config/BaseConfig";
 // import { Storage } from "@ionic/storage";
 // import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 // import { FormValidService } from "../../common/service/FormValid.Service";
