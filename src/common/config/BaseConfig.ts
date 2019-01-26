@@ -17,10 +17,10 @@ const ipDownload = "139.224.12.181:9527"; // 下载文件 测试服
 // const ip = "192.168.1.118:8088"; // 内网IP+端口
 // const ip = "192.168.1.222:8088"; // 内网IP+端口
 // const ip = "192.168.1.128:8980"; // 内网IP+端口 朱石磊
-const ip = "192.168.1.108:8980"; // 内网IP+端口 倪维巍
+// const ip = "192.168.1.108:8980"; // 内网IP+端口 倪维巍
 // const ip = "139.224.12.181:8980"; // 公网IP+端口
 
-// const ip = "139.224.12.181:9527"; // 公网IP+端口
+const ip = "139.224.12.181:9527"; // 公网IP+端口
 
 // const ip = "139.224.12.181:8989"; // 公网测试IP+端口
 
@@ -30,7 +30,8 @@ const ip = "192.168.1.108:8980"; // 内网IP+端口 倪维巍
 export const reqObj = {
   baseUrl: "http://" + ip + "/",
   baseImgUrl: "http://" + ip + "/home/", // 基础图片URL
-  andUpdAppUrl: "http://" + ipDownload + "/JuJiaAppDownload/update.apk", // 安卓下载更新APP包地址
+  andUpdAppUrl: "http://" + ipDownload + "/HuiFangAppDownload/update.apk", // 安卓下载更新APP包地址
+  pdfReadApp: "http://" + ipDownload + "/HuiFangAppDownload/AdobeReader.apk", // PDF阅读器下载APP包地址
   iosUpdAppUrl:
     "itms-apps://itunes.apple.com/us/app/domainsicle-domain-name-search/id511364723?ls=1&mt=8" // IOS下载更新APP包地址
 };
